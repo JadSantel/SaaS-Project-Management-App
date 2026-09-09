@@ -25,7 +25,7 @@ export async function createTaskAction(
   _prevState: TaskFormState,
   formData: FormData
 ): Promise<TaskFormState> {
-  const session = await auth();
+  const session = await auth(); // Clarify
   if (!session?.user) {
     return { error: "You must be signed in." };
   }
