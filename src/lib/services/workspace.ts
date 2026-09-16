@@ -79,3 +79,15 @@ export async function updateWorkspaceName(workspaceId: string, name: string) {
 export async function deleteWorkspace(workspaceId: string) {
     return prisma.workspace.delete({ where: { id: workspaceId } });
 }
+
+export async function listWorkspaceMembers(workspaceId: string) {
+    const members = await prisma.workspaceMember.findMany({
+        where: { workspaceId },
+        include: {
+            user: { select: { id: true, name: true, email: true } },
+        },
+        orderBy: { user: { name: "asc" } },
+    });
+
+    return members.map((m) => ({ ...m.user, role: m.role }));
+}

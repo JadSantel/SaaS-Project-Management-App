@@ -7,3 +7,4 @@ export class AppError extends Error {
 
 export class NotFoundError extends AppError {}
 export class ForbiddenError extends AppError {}
+export class ValidationError extends AppError {}
